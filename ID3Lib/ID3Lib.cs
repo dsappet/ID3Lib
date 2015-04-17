@@ -43,6 +43,8 @@ namespace ID3Library
         public string album;
         public string length;
         public string year;
+        public string trackNum;
+        public string genre;
     }
 
     public class ID3Lib
@@ -187,10 +189,13 @@ namespace ID3Library
             foreach (ID3Frame frame in tag.frames)
             {
                 if (new string(frame.frameId) == "TIT2") info.title = frame.data.Replace("\0", string.Empty);
-                if (new string(frame.frameId) == "TIT1") info.artist = frame.data.Replace("\0", string.Empty);
+                if (new string(frame.frameId) == "TPE1") info.artist = frame.data.Replace("\0", string.Empty);
                 if (new string(frame.frameId) == "TALB") info.album = frame.data.Replace("\0", string.Empty);
                 if (new string(frame.frameId) == "TLEN") info.length = frame.data.Replace("\0", string.Empty);
                 if (new string(frame.frameId) == "TYER") info.year = frame.data.Replace("\0", string.Empty);
+                if (new string(frame.frameId) == "TRCK") info.trackNum = frame.data.Replace("\0", string.Empty);
+                if (new string(frame.frameId) == "TCON") info.genre = frame.data.Replace("\0", string.Empty);
+                // Genre is a coded type, need to lookup in the appendix 
             }
             return info;
         }
